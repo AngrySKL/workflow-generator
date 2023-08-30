@@ -1,4 +1,4 @@
-<div class="all-width-height" dndDropzone  [dndDisableIf]="!dropzoneEnabled" (dndDrop)="onDrop($event)" dndDragoverClass="custom-drag-over">
+<div class="all-width-height">
   <mat-card class="all-width-height">
     <mat-card-header>
       <mat-card-title>Dropzone</mat-card-title>
@@ -6,8 +6,8 @@
         <mat-slide-toggle [checked]="dropzoneEnabled" (change)="dropzoneEnabled = $event.checked"> Enabled </mat-slide-toggle>
       </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
-      <section class="my-dropzone"  >
+    <mat-card-content fxFlex="1 0">
+      <section class="all-width-height" [dndDisableIf]="!dropzoneEnabled" (dndDrop)="onDrop($event)" dndDragoverClass="custom-drag-over" dndDropzone>
         <pre *ngIf="lastDropEvent">{{ lastDropEvent | json }}</pre>
       </section>
     </mat-card-content>
