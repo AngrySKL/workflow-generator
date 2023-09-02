@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>WorkflowZone</mat-card-title>
   </mat-card-header>
-  <mat-card-content fxFlex="1 0" (dndDrop)="onDrop($event)" class="all-width-height" dndDropzone dndEffectAllowed="copyMove">
+  <mat-card-content fxFlex="1 0" (dndDrop)="onDrop($event)" class="all-width-height overflow-auto" dndDropzone dndEffectAllowed="copyMove">
     <mat-card class="dndPlaceholder margin-top-1rem" dndPlaceholderRef> </mat-card>
     <mat-card *ngFor="let item of draggableList" appearance="outlined" class="margin-top-1rem" (dndMoved)="onDragged(item, 'move')" [dndDraggable]="item" dndEffectAllowed="move">
       <mat-card-content>
@@ -10,4 +10,7 @@
       </mat-card-content>
     </mat-card>
   </mat-card-content>
+  <mat-card-actions fxLayoutAlign="end">
+    <button mat-raised-button color="primary" (click)="generateWorkflow()">Generate</button>
+  </mat-card-actions>
 </mat-card>

@@ -31,4 +31,6 @@ export class EditorMainAreaComponent {
       this.draggableList.splice(index, 0, event.data);
     }
   }
+
+  generateWorkflow() {}
 }
