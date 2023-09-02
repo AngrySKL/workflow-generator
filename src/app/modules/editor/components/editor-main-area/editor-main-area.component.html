@@ -1,15 +1,13 @@
-<div class="all-width-height">
-  <mat-card class="all-width-height">
-    <mat-card-header>
-      <mat-card-title>Dropzone</mat-card-title>
-      <mat-card-subtitle>
-        <mat-slide-toggle [checked]="dropzoneEnabled" (change)="dropzoneEnabled = $event.checked"> Enabled </mat-slide-toggle>
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content fxFlex="1 0">
-      <section class="all-width-height" [dndDisableIf]="!dropzoneEnabled" (dndDrop)="onDrop($event)" dndDragoverClass="custom-drag-over" dndDropzone>
-        <pre *ngIf="lastDropEvent">{{ lastDropEvent | json }}</pre>
-      </section>
-    </mat-card-content>
-  </mat-card>
-</div>
+<mat-card class="all-width-height">
+  <mat-card-header>
+    <mat-card-title>WorkflowZone</mat-card-title>
+  </mat-card-header>
+  <mat-card-content fxFlex="1 0" (dndDrop)="onDrop($event)" class="all-width-height" dndDropzone dndEffectAllowed="copyMove">
+    <mat-card class="dndPlaceholder margin-top-1rem" dndPlaceholderRef> </mat-card>
+    <mat-card *ngFor="let item of draggableList" appearance="outlined" class="margin-top-1rem" (dndMoved)="onDragged(item, 'move')" [dndDraggable]="item" dndEffectAllowed="move">
+      <mat-card-content>
+        <span> {{ item.content }}</span>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

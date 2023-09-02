@@ -1,27 +1,11 @@
 <mat-card class="all-width-height">
-  <mat-card-title>Steps</mat-card-title>
+  <mat-card-header>
+    <mat-card-title>Steps</mat-card-title>
+  </mat-card-header>
   <mat-card-content>
-    <mat-card
-      appearance="raised"
-      *ngFor="let draggable of draggables"
-      [dndDisableIf]="draggable.disable"
-      [dndDraggable]="draggable.content"
-      [dndEffectAllowed]="draggable.effectAllowed"
-      (dndCanceled)="onDragged($event, 'none')"
-      (dndCopied)="onDragged($event, 'copy')"
-      (dndEnd)="onDragEnd($event)"
-      (dndLinked)="onDragged($event, 'link')"
-      (dndMoved)="onDragged($event, 'move')"
-      (dndStart)="onDragStart($event)"
-    >
+    <mat-card appearance="outlined" class="margin-top-1rem" *ngFor="let draggable of draggables" [dndDraggable]="draggable" dndEffectAllowed="copy">
       <mat-card-content>
-        <div *ngIf="draggable.handle" class="drag-handle" dndHandle>
-          <dnd-indirect-handle></dnd-indirect-handle>
-        </div>
-
-        draggable ({{ draggable.effectAllowed }})
-        <span [hidden]="!draggable.handle"> only with handle</span>
-        <span [hidden]="!draggable.disable"> DISABLED</span>
+        <span> {{ draggable.content }}</span>
       </mat-card-content>
     </mat-card>
   </mat-card-content>
