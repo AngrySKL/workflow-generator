@@ -6,10 +6,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [EditorMainAreaComponent],
-  imports: [CommonModule, DndModule, FlexLayoutModule, MatCardModule, MatListModule, MatButtonModule],
+  imports: [CommonModule, DndModule, FlexLayoutModule, MatCardModule, MatListModule, MatButtonModule, MatIconModule],
   exports: [EditorMainAreaComponent],
 })
 export class EditorModule {}

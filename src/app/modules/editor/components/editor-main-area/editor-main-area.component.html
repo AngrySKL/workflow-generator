@@ -1,5 +1,6 @@
 <mat-card class="all-width-height">
   <mat-card-header>
+    <mat-icon mat-card-avatar fontSet="material-icons-round">lan</mat-icon>
     <mat-card-title>WorkflowZone</mat-card-title>
   </mat-card-header>
   <mat-card-content fxFlex="1 0" (dndDrop)="onDrop($event)" class="all-width-height overflow-auto" dndDropzone dndEffectAllowed="copyMove">
@@ -11,6 +12,6 @@
     </mat-card>
   </mat-card-content>
   <mat-card-actions fxLayoutAlign="end">
-    <button mat-raised-button color="primary" (click)="generateWorkflow()">Generate</button>
+    <button mat-icon-button (click)="generateWorkflow()"><mat-icon fontSet="material-icons-round">build</mat-icon></button>
   </mat-card-actions>
 </mat-card>
