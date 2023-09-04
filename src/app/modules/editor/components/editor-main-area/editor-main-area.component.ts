@@ -32,5 +32,35 @@ export class EditorMainAreaComponent {
     }
   }
 
-  generateWorkflow() {}
+  generateWorkflow() {
+    var json = JSON.stringify(this.generateSteps(), null, ' ');
+    var blob = new Blob([json], { type: 'text/plain;charset=utf-8' });
+    var url = window.URL || window.webkitURL;
+    var link = url.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.download = 'sample-project-workflow.json';
+    a.href = link;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  generateSteps() {
+    var workflow = {
+      Id: 'Test',
+      Version: 1,
+      Description: '',
+      Steps: [] as any,
+    };
+    let stepId = 1;
+    this.draggableList.forEach((draggable) =>
+      workflow.Steps.push({
+        Id: `Step${stepId}`,
+        StepType: `WorkflowExecutor.SampleProject.Steps.${draggable.content}, WorkflowExecutor.SampleProject`,
+        NextStepId: `Step${++stepId}`,
+      })
+    );
+
+    return workflow;
+  }
 }
