@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 export class BackendService {
   urlPaths: any = {
     GetAllStepsByProjectName: '{endpoint}/Project/{projectName}/Steps',
+    StartWorkflow: '{endpoint}/Workflow/Start',
   };
   endpointPrefix = '';
   endpoint = 'https://localhost:7278';

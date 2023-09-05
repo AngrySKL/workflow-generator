@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DraggableItem } from '@shared/models/draggable-item';
+import { BackendService } from '@shared/services/backend.service';
 import { DndDropEvent, DropEffect } from 'ngx-drag-drop';
 
 @Component({
@@ -12,6 +13,8 @@ export class EditorMainAreaComponent {
   public dropzoneEnabled: boolean = true;
 
   draggableList: DraggableItem[] = [];
+
+  constructor(private backendService: BackendService) {}
 
   onDragged(item: any, effect: DropEffect) {
     if (effect === 'move') {
@@ -38,7 +41,7 @@ export class EditorMainAreaComponent {
     var url = window.URL || window.webkitURL;
     var link = url.createObjectURL(blob);
     var a = document.createElement('a');
-    a.download = 'sample-project-workflow.json';
+    a.download = 'sampleproject-workflow.json';
     a.href = link;
     document.body.appendChild(a);
     a.click();
@@ -53,14 +56,25 @@ export class EditorMainAreaComponent {
       Steps: [] as any,
     };
     let stepId = 1;
-    this.draggableList.forEach((draggable) =>
-      workflow.Steps.push({
-        Id: `Step${stepId}`,
-        StepType: `WorkflowExecutor.SampleProject.Steps.${draggable.content}, WorkflowExecutor.SampleProject`,
-        NextStepId: `Step${++stepId}`,
-      })
-    );
+    this.draggableList.forEach((draggable) => {
+      if (stepId === this.draggableList.length) {
+        workflow.Steps.push({
+          Id: `Step${stepId}`,
+          StepType: `WorkflowExecutor.SampleProject.Steps.${draggable.content}, WorkflowExecutor.SampleProject`,
+        });
+      } else {
+        workflow.Steps.push({
+          Id: `Step${stepId}`,
+          StepType: `WorkflowExecutor.SampleProject.Steps.${draggable.content}, WorkflowExecutor.SampleProject`,
+          NextStepId: `Step${++stepId}`,
+        });
+      }
+    });
 
     return workflow;
+  }
+
+  startWorkflow() {
+    this.backendService.post('StartWorkflow', {name: 'sampleproject'}).subscribe();
   }
 }
